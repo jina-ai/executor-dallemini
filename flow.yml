@@ -1,0 +1,9 @@
+jtype: Flow
+with:
+  protocol: http
+  env:
+    WANDB_START_METHOD: thread
+    JINA_LOG_LEVEL: debug
+executors:
+  - name: dalle_mini
+    uses: jinahub+docker://DalleMini

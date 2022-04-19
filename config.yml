@@ -1,0 +1,5 @@
+jtype: DalleMiniGenerator
+metas:
+  py_modules:
+    - executor.py
+    - dm_helper.py

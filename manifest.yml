@@ -1,0 +1,4 @@
+manifest_version: 1
+name: DalleMini
+description: Generate image from text prompt using DALLE-mini model
+url: https://github.com/jina-ai/executor-dallemini

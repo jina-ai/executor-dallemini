@@ -32,6 +32,8 @@ class DalleMiniGenerator(Executor):
             for img in generated_imgs:
                 buffered = BytesIO()
                 img.save(buffered, format="JPEG")
-                d.chunks.append(Document(blob=buffered.getvalue(), mime_type='image/jpg').convert_blob_to_datauri())
+                _d = Document(blob=buffered.getvalue(), mime_type='image/jpg').convert_blob_to_datauri()
+                _d.blob = None
+                d.chunks.append(_d)
 
             print(f'{d.text} done!')

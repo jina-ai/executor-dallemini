@@ -24,7 +24,7 @@ class DalleMiniGenerator(Executor):
     def generate(self, docs: DocumentArray, parameters: Dict, **kwargs):
         reload('dm_helper')
         import dm_helper
-        num_images = int(parameters.get('num_images', 2))
+        num_images = int(parameters.get('num_images', 1))
         for d in docs:
             print(f'Created {num_images} images from text prompt [{d.text}]')
             generated_imgs = dm_helper.generate_images(d.text, num_images)

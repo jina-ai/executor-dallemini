@@ -6,3 +6,5 @@ with:
 executors:
   - name: dalle_mini
     uses: jinahub+docker://DalleMini
+    resources:
+      memory: 16G

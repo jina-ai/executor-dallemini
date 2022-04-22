@@ -3,12 +3,13 @@ from typing import Dict
 
 from jina import Executor, requests, DocumentArray, Document
 
+import dm_helper
+
 
 class DalleMiniGenerator(Executor):
 
     @requests(on='/')
     async def generate(self, docs: DocumentArray, parameters: Dict, **kwargs):
-        import dm_helper
         num_images = int(parameters.get('num_images', 1))
         with_caption = bool(parameters.get('caption', True))
         for d in docs:

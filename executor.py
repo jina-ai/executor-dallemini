@@ -1,15 +1,29 @@
+import os
 from io import BytesIO
 from typing import Dict
 
 from jina import Executor, requests, DocumentArray, Document
 
-import dm_helper
+
+def reload(mod_name: str):
+    if f'{mod_name}_RELOADED' not in os.environ:
+        print(f'import {mod_name}')
+        import sys
+        from jina.importer import PathImporter
+        del sys.modules[mod_name]
+        os.environ['LAZY_LOAD'] = '1'
+        PathImporter.add_modules(f'{mod_name}.py')
+        os.unsetenv('LAZY_LOAD')
+        os.environ[f'{mod_name}_RELOADED'] = '1'
+        print(f'import {mod_name} is done!')
 
 
 class DalleMiniGenerator(Executor):
 
     @requests(on='/')
-    async def generate(self, docs: DocumentArray, parameters: Dict, **kwargs):
+    def generate(self, docs: DocumentArray, parameters: Dict, **kwargs):
+        reload('dm_helper')
+        import dm_helper
         num_images = int(parameters.get('num_images', 1))
         with_caption = bool(parameters.get('caption', True))
         for d in docs:

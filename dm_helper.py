@@ -1,6 +1,6 @@
 import random
 from functools import partial
-
+import wandb
 import jax
 import jax.numpy as jnp
 import numpy as np
@@ -25,7 +25,7 @@ gen_top_p = None
 temperature = 0.85
 cond_scale = 3.0
 
-# wandb.init(anonymous="must")
+wandb.init(anonymous="must")
 dtype = jnp.float32
 # Load models & tokenizer
 model = DalleBart.from_pretrained(DALLE_MODEL, revision=DALLE_COMMIT_ID)
